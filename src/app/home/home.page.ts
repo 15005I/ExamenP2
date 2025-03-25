@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonButton, IonCheckbox, IonInput } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GradeService, Grade } from '../grades.service';
+import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -26,7 +28,7 @@ export class HomePage implements OnInit {
   m3d: number = 0;
   editingGradeId: string | null = null;
 
-  constructor(private gradeService: GradeService){}
+  constructor(private gradeService: GradeService, private authService: AuthService, private router: Router){}
 
   ngOnInit() {
     this.getGrades();
@@ -99,6 +101,14 @@ export class HomePage implements OnInit {
         this.getGrades();
       });
     }
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']); // Navigate to the login page
+    }).catch((error) => {
+      console.error('Logout error:', error);
+    });
   }
 
   resetForm() {

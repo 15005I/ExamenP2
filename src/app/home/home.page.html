@@ -81,7 +81,7 @@
             <td style="border: 1px solid black; padding: 8px;">{{ grade.pmp }}</td>
             <td style="border: 1px solid black; padding: 8px;">{{ grade.m3d }}</td>
             <td style="border: 1px solid black; padding: 8px;">
-              <button (click)="editGrade(grade)">Editar</button><br>
+              <button (click)="editGrade(grade)">Editar</button>
               <button (click)="deleteGrade(grade.id)">Eliminar</button>
             </td>
           </tr>
@@ -89,4 +89,5 @@
       </table>
     </div>
   </div>
+  <button (click)="logout()" style="float: right; margin-top: -40px;">Cerrar sesión</button>
 </ion-content>
