@@ -1,13 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>sign-up</ion-title>
+    <ion-title>Sign-up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">sign-up</ion-title>
+      <ion-title size="large">Sign-up</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-content>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <!-- Campo para el email -->
+      <div class="mb-6">  
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address {{this.email}}</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" 
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="email" required #emailInput="ngModel" />
+      </div>
+
+            <!-- Campo para el password -->
+            <div class="mb-6">
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+              <input type="password" id="password" name="password" [(ngModel)]="password" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+                placeholder="password" required #passwordInput="ngModel" />
+            </div>
+      
+            <!-- Botón de sigup -->
+            <button type="submit"
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400"
+            [disabled]="registerForm.invalid">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Create Account
+              </span>
+              </button>
+          </form>
+          <button (click)="onSignUp()"
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Log In
+              </span>
+              </button>
+      
+  </ion-content>
 </ion-content>
