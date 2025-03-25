@@ -19,7 +19,12 @@ export class HomePage implements OnInit {
   apellidos: string = '';
   matricula: string = '';
   email: string = '';
-  grade: number = 0;
+  damm: number = 0;
+  oca: number = 0;
+  mate: number = 0;
+  pmp: number = 0;
+  m3d: number = 0;
+  editingGradeId: string | null = null;
 
   constructor(private gradeService: GradeService){}
 
@@ -31,26 +36,61 @@ export class HomePage implements OnInit {
     this.grades$ = this.gradeService.getGrades();
   }
 
-  addGrade(grade: number) {
-    if (grade) {
-      const newGrade: Grade = {name: this.name, apellidos: this.apellidos, matricula: this.matricula, email: this.email, grade: this.grade};
-      this.gradeService.addGrade(newGrade).then(() => {
-        this.getGrades(); 
-        this.name  = '';
-        this.apellidos = '';
-        this.matricula = '';
-        this.email = '';
-        this.grade = 0;
-      });
+  addOrUpdateGrade() {
+    if (this.editingGradeId) {
+      this.updateGrade(this.editingGradeId);
+    } else {
+      this.addGrade();
     }
   }
 
-  updateGrade(id: string | undefined, grade: number | undefined) {
-    if(id){
-      this.gradeService.updateGrade(id, { grade: Number(grade) }).then(() => {
-        this.getGrades();
-      });
-    }
+  addGrade() {
+    const newGrade: Grade = {
+      name: this.name,
+      apellidos: this.apellidos,
+      matricula: this.matricula,
+      email: this.email,
+      damm: this.damm,
+      oca: this.oca,
+      mate: this.mate,
+      pmp: this.pmp,
+      m3d: this.m3d
+    };
+    this.gradeService.addGrade(newGrade).then(() => {
+      this.getGrades(); 
+      this.resetForm();
+    });
+  }
+
+  updateGrade(id: string) {
+    const updatedGrade: Partial<Grade> = {
+      name: this.name,
+      apellidos: this.apellidos,
+      matricula: this.matricula,
+      email: this.email,
+      damm: this.damm,
+      oca: this.oca,
+      mate: this.mate,
+      pmp: this.pmp,
+      m3d: this.m3d
+    };
+    this.gradeService.updateGrade(id, updatedGrade).then(() => {
+      this.getGrades();
+      this.resetForm();
+    });
+  }
+
+  editGrade(grade: Grade) {
+    this.editingGradeId = grade.id || null;
+    this.name = grade.name;
+    this.apellidos = grade.apellidos;
+    this.matricula = grade.matricula;
+    this.email = grade.email;
+    this.damm = grade.damm;
+    this.oca = grade.oca;
+    this.mate = grade.mate;
+    this.pmp = grade.pmp;
+    this.m3d = grade.m3d;
   }
 
   deleteGrade(id: string | undefined) {
@@ -61,4 +101,16 @@ export class HomePage implements OnInit {
     }
   }
 
+  resetForm() {
+    this.name = '';
+    this.apellidos = '';
+    this.matricula = '';
+    this.email = '';
+    this.damm = 0;
+    this.oca = 0;
+    this.mate = 0;
+    this.pmp = 0;
+    this.m3d = 0;
+    this.editingGradeId = null;
+  }
 }

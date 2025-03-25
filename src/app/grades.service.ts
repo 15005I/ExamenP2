@@ -8,7 +8,11 @@ export interface Grade {
   apellidos: string;
   matricula: string;
   email: string;
-  grade: number;
+  damm: number;
+  oca: number;
+  mate: number;
+  pmp: number;
+  m3d: number;
 }
 
 @Injectable({

@@ -4,7 +4,7 @@
       <h1 class="ion-text-center" style="color: rgb(255, 255, 255);">Lista de registros</h1>
     </header>
     <br>
-    <form (ngSubmit)="addGrade(grade)" #form="ngForm">
+    <form (ngSubmit)="addOrUpdateGrade()" #form="ngForm">
       <div>
         <label for="name">Nombre</label>
         <input id="name" name="name" [(ngModel)]="name" required #nameInput="ngModel">
@@ -45,7 +45,12 @@
         <input id="pmp" name="pmp" type="number" [(ngModel)]="pmp" required #pmpInput="ngModel">
         <div *ngIf="pmpInput.invalid && pmpInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
       </div>
-      <button type="submit" [disabled]="form.invalid">Nuevo registro</button>
+      <div>
+        <label for="m3d">M3D</label>
+        <input id="m3d" name="m3d" type="number" [(ngModel)]="m3d" required #m3dInput="ngModel">
+        <div *ngIf="m3dInput.invalid && m3dInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
+      </div>
+      <button type="submit" [disabled]="form.invalid">{{ editingGradeId ? 'Actualizar' : 'Nuevo registro' }}</button>
     </form>
     <br><br><br>
     <div class="container" style="background-color: rgb(141, 141, 141);">
@@ -60,6 +65,7 @@
             <th style="border: 1px solid black; padding: 8px;">OCA</th>
             <th style="border: 1px solid black; padding: 8px;">MATE</th>
             <th style="border: 1px solid black; padding: 8px;">PMP</th>
+            <th style="border: 1px solid black; padding: 8px;">M3D</th>
             <th style="border: 1px solid black; padding: 8px;">Acciones</th>
           </tr>
         </thead>
@@ -73,7 +79,9 @@
             <td style="border: 1px solid black; padding: 8px;">{{ grade.oca }}</td>
             <td style="border: 1px solid black; padding: 8px;">{{ grade.mate }}</td>
             <td style="border: 1px solid black; padding: 8px;">{{ grade.pmp }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.m3d }}</td>
             <td style="border: 1px solid black; padding: 8px;">
+              <button (click)="editGrade(grade)">Editar</button><br>
               <button (click)="deleteGrade(grade.id)">Eliminar</button>
             </td>
           </tr>
