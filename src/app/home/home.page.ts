@@ -31,8 +31,8 @@ export class HomePage implements OnInit {
     this.grades$ = this.gradeService.getGrades();
   }
 
-  addGrade(description: string) {
-    if (description) {
+  addGrade(grade: number) {
+    if (grade) {
       const newGrade: Grade = {name: this.name, apellidos: this.apellidos, matricula: this.matricula, email: this.email, grade: this.grade};
       this.gradeService.addGrade(newGrade).then(() => {
         this.getGrades(); 
@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  deleteTask(id: string | undefined) {
+  deleteGrade(id: string | undefined) {
     if (id) {
       this.gradeService.deleteGrade(id).then(() => {
         this.getGrades();

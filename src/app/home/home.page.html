@@ -1,20 +1,84 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div style="height: 100vh; background-color: rgb(122, 122, 122);">
+    <header style="background-color: rgb(0, 0, 0); padding: 20px;">
+      <h1 class="ion-text-center" style="color: rgb(255, 255, 255);">Lista de registros</h1>
+    </header>
+    <br>
+    <form (ngSubmit)="addGrade(grade)" #form="ngForm">
+      <div>
+        <label for="name">Nombre</label>
+        <input id="name" name="name" [(ngModel)]="name" required #nameInput="ngModel">
+        <div *ngIf="nameInput.invalid && nameInput.touched" style="color: red;">Por favor ingrese un nombre.</div>
+      </div>
+      <div>
+        <label for="apellidos">Apellidos</label>
+        <input id="apellidos" name="apellidos" [(ngModel)]="apellidos" required #apellidosInput="ngModel">
+        <div *ngIf="apellidosInput.invalid && apellidosInput.touched" style="color: red;">Por favor ingrese apellidos.</div>
+      </div>
+      <div>
+        <label for="matricula">Matricula</label>
+        <input id="matricula" name="matricula" [(ngModel)]="matricula" required #matriculaInput="ngModel">
+        <div *ngIf="matriculaInput.invalid && matriculaInput.touched" style="color: red;">Por favor ingrese una matricula.</div>
+      </div>
+      <div>
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" [(ngModel)]="email" required #emailInput="ngModel">
+        <div *ngIf="emailInput.invalid && emailInput.touched" style="color: red;">Por favor ingrese un correo electrónico válido.</div>
+      </div>
+      <div>
+        <label for="damm">DAMM</label>
+        <input id="damm" name="damm" type="number" [(ngModel)]="damm" required #dammInput="ngModel">
+        <div *ngIf="dammInput.invalid && dammInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
+      </div>
+      <div>
+        <label for="oca">OCA</label>
+        <input id="oca" name="oca" type="number" [(ngModel)]="oca" required #ocaInput="ngModel">
+        <div *ngIf="ocaInput.invalid && ocaInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
+      </div>
+      <div>
+        <label for="mate">MATE</label>
+        <input id="mate" name="mate" type="number" [(ngModel)]="mate" required #mateInput="ngModel">
+        <div *ngIf="mateInput.invalid && mateInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
+      </div>
+      <div>
+        <label for="pmp">PMP</label>
+        <input id="pmp" name="pmp" type="number" [(ngModel)]="pmp" required #pmpInput="ngModel">
+        <div *ngIf="pmpInput.invalid && pmpInput.touched" style="color: red;">Por favor ingrese una calificación válida.</div>
+      </div>
+      <button type="submit" [disabled]="form.invalid">Nuevo registro</button>
+    </form>
+    <br><br><br>
+    <div class="container" style="background-color: rgb(141, 141, 141);">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid black; padding: 8px;">Nombre</th>
+            <th style="border: 1px solid black; padding: 8px;">Apellidos</th>
+            <th style="border: 1px solid black; padding: 8px;">Matricula</th>
+            <th style="border: 1px solid black; padding: 8px;">Correo electrónico</th>
+            <th style="border: 1px solid black; padding: 8px;">DAMM</th>
+            <th style="border: 1px solid black; padding: 8px;">OCA</th>
+            <th style="border: 1px solid black; padding: 8px;">MATE</th>
+            <th style="border: 1px solid black; padding: 8px;">PMP</th>
+            <th style="border: 1px solid black; padding: 8px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let grade of grades$ | async">
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.name }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.apellidos }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.matricula }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.email }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.damm }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.oca }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.mate }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ grade.pmp }}</td>
+            <td style="border: 1px solid black; padding: 8px;">
+              <button (click)="deleteGrade(grade.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </ion-content>
